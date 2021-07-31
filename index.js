@@ -10,7 +10,7 @@ const listParent = document.querySelector(".list__container");
 addBtn.addEventListener('click', function(e) {
     const newItem = document.createElement('li');
     newItem.textContent = inputTodo.value;
-    newItem.id = "list__item";
+    newItem.id = "draggable";
     listParent.append(newItem);
     console.log(newItem);
 })
