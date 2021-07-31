@@ -4,12 +4,15 @@ const inputTodo = document.querySelector(".todo__input");
 const addBtn = document.querySelector(".add__button");
 const listParent = document.querySelector(".list__container");
 
+
 //make the 'add' button work
 
 addBtn.addEventListener('click', function(e) {
     const newItem = document.createElement('li');
     newItem.textContent = inputTodo.value;
+    newItem.id = "list__item";
     listParent.append(newItem);
+    console.log(newItem);
 })
 
 //make each list item drag - and - droppable
