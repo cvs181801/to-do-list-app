@@ -33,3 +33,16 @@ body {
 .todo__input {
     margin: .5em 0 .5em 0;
 }
+
+li {
+    list-style: none;
+}
+
+.draggable {
+    cursor: move;
+}
+
+.dragging {
+    background-color: var(--ltGrey);
+    opacity: .5;
+}
