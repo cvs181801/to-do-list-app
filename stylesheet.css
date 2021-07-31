@@ -1,5 +1,5 @@
 :root {
-    --ff-main: font-family: 'Gowun Dodum', sans-serif;
+    --ff-main: 'Gowun Dodum', sans-serif;
     --ltGrey: lightgrey;
     --medGrey: rgb(117, 116, 116);
     --drkGrey: rgb(41, 41, 41);
@@ -14,4 +14,6 @@
 body {
     background-color: var(--medGrey);
     font-family: var(--ff-main);
+    margin: 0 auto;
+    text-align: center;
 }
