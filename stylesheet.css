@@ -14,6 +14,22 @@
 body {
     background-color: var(--medGrey);
     font-family: var(--ff-main);
-    margin: 0 auto;
+    margin: 5em 30em 1.5em 30em;
     text-align: center;
+}
+
+.list__container {
+    max-width: 10em;
+    text-align: left;
+}
+
+.add__button {
+    background-color:var(--drkGrey);
+    color: var(--ltGrey);
+    border-radius: 7px;
+    padding: .2em;
+}
+
+.todo__input {
+    margin: .5em 0 .5em 0;
 }
