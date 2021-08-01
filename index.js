@@ -12,7 +12,7 @@ console.log(draggables);
 //make the 'add' button work
 
 addBtn.addEventListener('click', function(e) {
-    const newContainer = document.createElement('li');
+    const newContainer = document.createElement('div');
     const newItem = document.createElement('p');
     newItem.textContent = inputTodo.value;
     newItem.className = "draggable";
