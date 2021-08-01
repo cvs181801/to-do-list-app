@@ -4,7 +4,7 @@ const inputTodo = document.querySelector(".todo__input");
 const addBtn = document.querySelector(".add__button");
 const listParent = document.querySelector(".list__container");
 const draggables = document.querySelectorAll(".draggable");
-const listContainer1 = document.querySelector("#list__1");
+
 
 //test area
 console.log(draggables);
@@ -12,17 +12,13 @@ console.log(draggables);
 //make the 'add' button work
 
 addBtn.addEventListener('click', function(e) {
-    const newContainer = document.createElement('div');
-    const newItem = document.createElement('p');
+    const newItem = document.createElement('li');
     newItem.textContent = inputTodo.value;
     newItem.className = "draggable";
     const attribute = document.createAttribute('draggable');
     attribute.value = "true";
     newItem.setAttributeNode(attribute);
-    newContainer.append(newItem);
-    listParent.append(newContainer);
-    console.log(newItem);
-    console.log(newContainer);
+    listParent.append(newItem);
 })
 
 //make each list item drag - and - droppable
@@ -89,4 +85,5 @@ draggables.forEach( draggable => {
         listParent.append(dragging);
     })
 })
+
 
