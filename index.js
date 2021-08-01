@@ -83,10 +83,10 @@ draggables.forEach( draggable => {
     draggable.addEventListener('dragend', function(e) {
         draggable.classList.remove("dragging");
     })
-    listContainer1.addEventListener('dragover', function(e) {
+    listParent.addEventListener('dragover', function(e) {
         e.preventDefault();
         const dragging= document.querySelector(".dragging");
-        listContainer1.appendChild(dragging);
+        listParent.append(dragging);
     })
 })
 
