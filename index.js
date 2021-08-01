@@ -80,10 +80,19 @@ draggables.forEach( draggable => {
         draggable.classList.remove("dragging");
     })
     listParent.addEventListener('dragover', function(e) {
+        const afterElement = getDragAfterElement(listParent, e.clientY);
         e.preventDefault();
-        const dragging= document.querySelector(".dragging");
+        const dragging = document.querySelector(".dragging");
         listParent.append(dragging);
     })
 })
 
+function getDragAfterElement(listParent, y) {
+    const draggableElements = [...listParent.querySelectorAll('.draggable:not(.dragging)')]; //element:not(element) syntax is CSS selector syntax rather than JS syntax
+    draggableElements.reduce(); //The reduce() method executes a reducer function (that you provide) on each element of the array, resulting in a single output value.
+    draggableElements.reduce((closest,child) => {
+    const box = child.getBoundingClientRect();
+    console.log(box);
+    }, {offset: Number.POSITIVE_INFINITY}) //positive infinity is here so that every number possible in the sortable list will be smaller than it.
+}
 
