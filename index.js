@@ -19,16 +19,10 @@ addBtn.addEventListener('click', function(e) {
     attribute.value = "true";
     newItem.setAttributeNode(attribute);
     listParent.append(newItem);
+    console.log('newItem:',newItem);
 })
 
 //make each list item drag - and - droppable
-
-// let dragged;
-
-// document.addEventListener("drag", function(e) {
-
-// }, false)
-// //1/2
 // addEventListener(type: "drag", listener: (this: Document, ev: DragEvent) => any, options?: boolean | AddEventListenerOptions): void
 // Appends an event listener for events whose type attribute value is type. The callback argument sets the callback that will be invoked when the event is dispatched.
 // The options argument sets listener-specific options. For compatibility this can be a boolean, in which case the method behaves exactly as if the value was specified as options's capture.
@@ -36,41 +30,6 @@ addBtn.addEventListener('click', function(e) {
 // When set to true, options's passive indicates that the callback will not cancel the event by invoking preventDefault(). This is used to enable performance optimizations described in § 2.8 Observing event listeners.
 // When set to true, options's once indicates that the callback will only be invoked once after which the event listener will be removed.
 // The event listener is appended to target's event listener list and is not appended if it has the same type, callback, and capture.
-
-// document.addEventListener("dragstart", function(e) {
-//     dragged = e.target;
-//     e.target.style.backgroundColor = "light-grey";
-// }, false)
-
-// document.addEventListener("dragend", function(e) {
-//     e.target.style.backgroundColor = "";
-// }, false)
-
-// document.addEventListener("dragover", function(e) {
-//     e.preventDefault();
-// }, false);
-
-// document.addEventListener("dragenter", function(e) {
-//     if(e.target.className == "dropzone") {
-//         e.target.style.backgroundColor = "blue";
-//     }
-// }, false)
-
-// document.addEventListener("dragleave", function(e) {
-//     if(e.target.className == "dropzone") {
-//         e.target.style.backgroundColor = "";
-//     }
-// }, false)
-
-// document.addEventListener("drop", function(e) {
-//     e.preventDefault();
-//     if (e.target.className == "dropzone") {
-//         e.target.style.backgroundColor = "";
-//         dragged.parentNode.removeChild(dragged);
-//         e.target.appendChild(dragged);
-//     }
-
-// }, false)
 
 draggables.forEach( draggable => {
     draggable.addEventListener('dragstart', function(e) {
@@ -83,7 +42,7 @@ draggables.forEach( draggable => {
         e.preventDefault();
         const afterElement = getDragAfterElement(listParent, e.clientY);
         const dragging = document.querySelector(".dragging");
-        console.log(afterElement);
+        console.log('afterElement:', afterElement);
         if(afterElement === null) {
             listParent.appendChild(draggable)
         } else {
@@ -92,14 +51,16 @@ draggables.forEach( draggable => {
     })
 })
 
-function getDragAfterElement(element, y) {
-    const draggableElements = [...element.querySelectorAll('.draggable:not(.dragging)')]; //element:not(element) syntax is CSS selector syntax rather than JS syntax
+function getDragAfterElement(listParent, y) {
+    const draggableElements = [...listParent.querySelectorAll('.draggable:not(.dragging)')]; //element:not(element) syntax is CSS selector syntax rather than JS syntax
     //The reduce() method executes a reducer function (that you provide) on each element of the array, resulting in a single output value.
     return draggableElements.reduce((closest , child) => {
     const box = child.getBoundingClientRect();
+    console.log(box);
     const offset = y - box.top - box.height / 2;
-    console.log('offset:', offset );
-    console.log('closest :', closest);
+    //console.log('offset:', offset );
+    //console.log('closest :', closest);
+    //console.log('closest.offset:', closest.offset);
     if (offset < 0 && offset > closest.offset) {
         return {offset: offset, element: child}
     } else {
