@@ -22,6 +22,27 @@ addBtn.addEventListener('click', function(e) {
     draggables.push(newItem);
     console.log('newItem:',newItem);
     console.log('pushed draggables:', draggables);
+
+    draggables.forEach( element => {
+        element.addEventListener('dragstart', function(e) {
+            element.classList.add("dragging");
+        })
+        element.addEventListener('dragend', function(e) {
+            element.classList.remove("dragging");
+        })
+        
+        listParent.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            const afterElement = getDragAfterElement(listParent, e.clientY);
+            const draggable = document.querySelector(".dragging");
+            console.log('afterElement:', afterElement);
+            if(afterElement === null) {
+                listParent.appendChild(draggable)
+            } else {
+                listParent.insertBefore(draggable, afterElement);
+            }  
+        })
+    })
 })
 
 //make each list item drag - and - droppable
@@ -35,27 +56,6 @@ addBtn.addEventListener('click', function(e) {
 
 
 
-
-draggables.forEach( element => {
-    element.addEventListener('dragstart', function(e) {
-        element.classList.add("dragging");
-    })
-    element.addEventListener('dragend', function(e) {
-        element.classList.remove("dragging");
-    })
-    
-    listParent.addEventListener('dragover', function(e) {
-        e.preventDefault();
-        const afterElement = getDragAfterElement(listParent, e.clientY);
-        const dragging = document.querySelector(".dragging");
-        console.log('afterElement:', afterElement);
-        if(afterElement === null) {
-            listParent.appendChild(draggable)
-        } else {
-            listParent.insertBefore(draggable, afterElement);
-        }  
-    })
-})
 
 
 function getDragAfterElement(listParent, y) {
