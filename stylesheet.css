@@ -34,9 +34,10 @@ body {
     margin: .5em 0 .5em 0;
 }
 
-li {
+p {
     list-style: none;
-    font-size: 2em;
+    font-size: 1.2em;
+    max-width: 10em;
 }
 
 .draggable {

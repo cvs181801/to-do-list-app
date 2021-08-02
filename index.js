@@ -33,10 +33,7 @@ addBtn.addEventListener('click', function(e) {
 
 
 
-function dragTheItems() {
-    draggables = document.querySelectorAll(".draggable");
-    let newDraggables = [...draggables];
-    console.log(newDraggables);
+
 draggables.forEach( draggable => {
     draggable.addEventListener('dragstart', function(e) {
         draggable.classList.add("dragging");
@@ -50,13 +47,13 @@ draggables.forEach( draggable => {
         const dragging = document.querySelector(".dragging");
         console.log('afterElement:', afterElement);
         if(afterElement === null) {
-            listParent.appendChild(dragging)
+            listParent.appendChild(draggable)
         } else {
-            listParent.insertBefore(dragging, afterElement);
+            listParent.insertBefore(draggable, afterElement);
         }  
     })
 })
-}
+
 
 function getDragAfterElement(listParent, y) {
     const draggableElements = [...listParent.querySelectorAll('.draggable:not(.dragging)')]; //element:not(element) syntax is CSS selector syntax rather than JS syntax
