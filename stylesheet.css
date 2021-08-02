@@ -36,6 +36,7 @@ body {
 
 li {
     list-style: none;
+    font-size: 2em;
 }
 
 .draggable {
