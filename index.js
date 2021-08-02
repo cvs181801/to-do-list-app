@@ -3,7 +3,7 @@
 const inputTodo = document.querySelector(".todo__input");
 const addBtn = document.querySelector(".add__button");
 const listParent = document.querySelector(".list__container");
-let draggables = document.querySelectorAll(".draggable");
+let draggables = [...document.querySelectorAll(".draggable")];
 
 
 //test area
@@ -19,7 +19,9 @@ addBtn.addEventListener('click', function(e) {
     attribute.value = "true";
     newItem.setAttributeNode(attribute);
     listParent.append(newItem);
+    draggables.push(newItem);
     console.log('newItem:',newItem);
+    console.log('pushed draggables:', draggables);
 })
 
 //make each list item drag - and - droppable
@@ -34,13 +36,14 @@ addBtn.addEventListener('click', function(e) {
 
 
 
-draggables.forEach( draggable => {
-    draggable.addEventListener('dragstart', function(e) {
-        draggable.classList.add("dragging");
+draggables.forEach( element => {
+    element.addEventListener('dragstart', function(e) {
+        element.classList.add("dragging");
     })
-    draggable.addEventListener('dragend', function(e) {
-        draggable.classList.remove("dragging");
+    element.addEventListener('dragend', function(e) {
+        element.classList.remove("dragging");
     })
+    
     listParent.addEventListener('dragover', function(e) {
         e.preventDefault();
         const afterElement = getDragAfterElement(listParent, e.clientY);
