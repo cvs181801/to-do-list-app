@@ -81,6 +81,7 @@ draggables.forEach( draggable => {
     })
     listParent.addEventListener('dragover', function(e) {
         const afterElement = getDragAfterElement(listParent, e.clientY);
+        console.log(afterElement);
         e.preventDefault();
         const dragging = document.querySelector(".dragging");
         listParent.append(dragging);
@@ -89,10 +90,16 @@ draggables.forEach( draggable => {
 
 function getDragAfterElement(listParent, y) {
     const draggableElements = [...listParent.querySelectorAll('.draggable:not(.dragging)')]; //element:not(element) syntax is CSS selector syntax rather than JS syntax
-    draggableElements.reduce(); //The reduce() method executes a reducer function (that you provide) on each element of the array, resulting in a single output value.
+    //The reduce() method executes a reducer function (that you provide) on each element of the array, resulting in a single output value.
     draggableElements.reduce((closest,child) => {
     const box = child.getBoundingClientRect();
-    console.log(box);
-    }, {offset: Number.POSITIVE_INFINITY}) //positive infinity is here so that every number possible in the sortable list will be smaller than it.
+    const offset = y - box.top - box.height/2;
+    if (offset < 0 && offset > closest.offset) {
+        return {offset: offset, element: child}
+    } else {
+       return closest
+    }
+    
+    }, {offset: Number.NEGATIVE_INFINITY}).element //positive infinity is here so that every number possible in the sortable list will be smaller than it.
 }
 
