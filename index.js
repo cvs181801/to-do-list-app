@@ -3,7 +3,7 @@
 const inputTodo = document.querySelector(".todo__input");
 const addBtn = document.querySelector(".add__button");
 const listParent = document.querySelector(".list__container");
-const draggables = document.querySelectorAll(".draggable");
+let draggables = document.querySelectorAll(".draggable");
 
 
 //test area
@@ -12,7 +12,7 @@ console.log(draggables);
 //make the 'add' button work
 
 addBtn.addEventListener('click', function(e) {
-    const newItem = document.createElement('li');
+    const newItem = document.createElement('p');
     newItem.textContent = inputTodo.value;
     newItem.className = "draggable";
     const attribute = document.createAttribute('draggable');
@@ -31,6 +31,12 @@ addBtn.addEventListener('click', function(e) {
 // When set to true, options's once indicates that the callback will only be invoked once after which the event listener will be removed.
 // The event listener is appended to target's event listener list and is not appended if it has the same type, callback, and capture.
 
+
+
+function dragTheItems() {
+    draggables = document.querySelectorAll(".draggable");
+    let newDraggables = [...draggables];
+    console.log(newDraggables);
 draggables.forEach( draggable => {
     draggable.addEventListener('dragstart', function(e) {
         draggable.classList.add("dragging");
@@ -44,12 +50,13 @@ draggables.forEach( draggable => {
         const dragging = document.querySelector(".dragging");
         console.log('afterElement:', afterElement);
         if(afterElement === null) {
-            listParent.appendChild(draggable)
+            listParent.appendChild(dragging)
         } else {
-            listParent.insertBefore(draggable, afterElement);
+            listParent.insertBefore(dragging, afterElement);
         }  
     })
 })
+}
 
 function getDragAfterElement(listParent, y) {
     const draggableElements = [...listParent.querySelectorAll('.draggable:not(.dragging)')]; //element:not(element) syntax is CSS selector syntax rather than JS syntax
@@ -58,9 +65,9 @@ function getDragAfterElement(listParent, y) {
     const box = child.getBoundingClientRect();
     console.log(box);
     const offset = y - box.top - box.height / 2;
-    //console.log('offset:', offset );
-    //console.log('closest :', closest);
-    //console.log('closest.offset:', closest.offset);
+    console.log('offset:', offset );
+    console.log('closest :', closest);
+    console.log('closest.offset:', closest.offset);
     if (offset < 0 && offset > closest.offset) {
         return {offset: offset, element: child}
     } else {
