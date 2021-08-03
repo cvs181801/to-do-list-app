@@ -4,7 +4,7 @@ const inputTodo = document.querySelector(".todo__input");
 const addBtn = document.querySelector(".add__button");
 const listParent = document.querySelector(".list__container");
 let draggables = [...document.querySelectorAll(".draggable")];
-
+const deleteBtn = document.querySelector(".delete__button");
 
 //test area
 console.log(draggables);
@@ -23,6 +23,7 @@ addBtn.addEventListener('click', function(e) {
     console.log('newItem:',newItem);
     console.log('pushed draggables:', draggables);
 
+//make each item draggable if user adds new items
     draggables.forEach( element => {
         element.addEventListener('dragstart', function(e) {
             element.classList.add("dragging");
@@ -45,18 +46,28 @@ addBtn.addEventListener('click', function(e) {
     })
 })
 
-//make each list item drag - and - droppable
-// addEventListener(type: "drag", listener: (this: Document, ev: DragEvent) => any, options?: boolean | AddEventListenerOptions): void
-// Appends an event listener for events whose type attribute value is type. The callback argument sets the callback that will be invoked when the event is dispatched.
-// The options argument sets listener-specific options. For compatibility this can be a boolean, in which case the method behaves exactly as if the value was specified as options's capture.
-// When set to true, options's capture prevents callback from being invoked when the event's eventPhase attribute value is BUBBLING_PHASE. When false (or not present), callback will not be invoked when event's eventPhase attribute value is CAPTURING_PHASE. Either way, callback will be invoked if event's eventPhase attribute value is AT_TARGET.
-// When set to true, options's passive indicates that the callback will not cancel the event by invoking preventDefault(). This is used to enable performance optimizations described in § 2.8 Observing event listeners.
-// When set to true, options's once indicates that the callback will only be invoked once after which the event listener will be removed.
-// The event listener is appended to target's event listener list and is not appended if it has the same type, callback, and capture.
+//make each list item drag - and - droppable even if user does not add new items
 
-
-
-
+draggables.forEach( element => {
+    element.addEventListener('dragstart', function(e) {
+        element.classList.add("dragging");
+    })
+    element.addEventListener('dragend', function(e) {
+        element.classList.remove("dragging");
+    })
+    
+    listParent.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(listParent, e.clientY);
+        const draggable = document.querySelector(".dragging");
+        console.log('afterElement:', afterElement);
+        if(afterElement === null) {
+            listParent.appendChild(draggable)
+        } else {
+            listParent.insertBefore(draggable, afterElement);
+        }  
+    })
+})
 
 function getDragAfterElement(listParent, y) {
     const draggableElements = [...listParent.querySelectorAll('.draggable:not(.dragging)')]; //element:not(element) syntax is CSS selector syntax rather than JS syntax
@@ -76,3 +87,9 @@ function getDragAfterElement(listParent, y) {
     
     }, {offset: Number.NEGATIVE_INFINITY}).element //positive infinity is here so that every number possible in the sortable list will be smaller than it.
 }
+
+
+deleteBtn.addEventListener('dragend', function(e) {
+    e.preventDefault;
+    console.log('dragging over delete');
+})

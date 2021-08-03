@@ -18,12 +18,17 @@ body {
     text-align: center;
 }
 
+.container__div {
+    display: flex;
+}
+
 .list__container {
     max-width: 10em;
     text-align: left;
 }
 
-.add__button {
+.add__button,
+.delete__button {
     background-color:var(--drkGrey);
     color: var(--ltGrey);
     border-radius: 7px;
