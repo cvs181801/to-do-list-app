@@ -96,20 +96,34 @@ function getDragAfterElement(listParent, y) {
     }, {offset: Number.NEGATIVE_INFINITY}).element //positive infinity is here so that every number possible in the sortable list will be smaller than it.
 }
 
-function findTheIndex() {
-    return draggables.findIndex(element => element.classList.contains("dragging"));
-    //console.log(findDraggable);
-   
+// function findTheIndex() {
+//     const findDraggable = draggables.findIndex((element) => element.classList.contains("dragging"));
+//     draggables.splice(findDraggable, 1);
+// }
+
+function removeByClass(array, cls) {
+    for(let i=0; i<array.length; i++) {
+        if (array[i].class == cls ) {
+            array.splice(i, 1)
+        }
+    }
 }
+
+
 
 
     deleteContainer.addEventListener('dragover', function(e) {
         e.preventDefault();
-        console.log('it worked!!')
+        console.log('it worked!')
+        console.log(draggables);
+        return removeByClass(draggables, "dragging");
+        
+        
+        //findTheIndex();
         //let draggable = document.querySelector(".dragging"); 
         
-        findTheIndex() 
-        //draggables.splice(0, 1)
+        //console.log(findTheIndex());
+        
         // console.log('draggable:', draggable);
         // console.log('draggables:', draggables);
         // console.log(e);
