@@ -18,21 +18,28 @@ body {
     text-align: center;
 }
 
-.container__div {
+/*.container__div {
     display: flex;
-}
+}*/
 
 .list__container {
     max-width: 10em;
     text-align: left;
 }
 
-.add__button,
+.add__button {
+    background-color:var(--drkGrey);
+    color: var(--ltGrey);
+    border-radius: 7px;
+    padding: .2em;
+}
+
 .delete__button {
     background-color:var(--drkGrey);
     color: var(--ltGrey);
     border-radius: 7px;
     padding: .2em;
+    font-size: 3em;
 }
 
 .todo__input {

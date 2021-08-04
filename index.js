@@ -5,9 +5,10 @@ const addBtn = document.querySelector(".add__button");
 const listParent = document.querySelector(".list__container");
 let draggables = [...document.querySelectorAll(".draggable")];
 const deleteBtn = document.querySelector(".delete__button");
+const deleteContainer = document.querySelector(".delete__btn__contain");
 
-//test area
-console.log(draggables);
+//test area 
+console.log(deleteBtn);
 
 //make the 'add' button work
 
@@ -20,8 +21,7 @@ addBtn.addEventListener('click', function(e) {
     newItem.setAttributeNode(attribute);
     listParent.append(newItem);
     draggables.push(newItem);
-    console.log('newItem:',newItem);
-    console.log('pushed draggables:', draggables);
+
 
 //make each item draggable if user adds new items
     draggables.forEach( element => {
@@ -36,7 +36,6 @@ addBtn.addEventListener('click', function(e) {
             e.preventDefault();
             const afterElement = getDragAfterElement(listParent, e.clientY);
             const draggable = document.querySelector(".dragging");
-            console.log('afterElement:', afterElement);
             if(afterElement === null) {
                 listParent.appendChild(draggable)
             } else {
@@ -60,7 +59,6 @@ draggables.forEach( element => {
         e.preventDefault();
         const afterElement = getDragAfterElement(listParent, e.clientY);
         const draggable = document.querySelector(".dragging");
-        console.log('afterElement:', afterElement);
         if(afterElement === null) {
             listParent.appendChild(draggable)
         } else {
@@ -74,11 +72,7 @@ function getDragAfterElement(listParent, y) {
     //The reduce() method executes a reducer function (that you provide) on each element of the array, resulting in a single output value.
     return draggableElements.reduce((closest , child) => {
     const box = child.getBoundingClientRect();
-    console.log(box);
     const offset = y - box.top - box.height / 2;
-    console.log('offset:', offset );
-    console.log('closest :', closest);
-    console.log('closest.offset:', closest.offset);
     if (offset < 0 && offset > closest.offset) {
         return {offset: offset, element: child}
     } else {
@@ -89,7 +83,9 @@ function getDragAfterElement(listParent, y) {
 }
 
 
-deleteBtn.addEventListener('dragend', function(e) {
-    e.preventDefault;
-    console.log('dragging over delete');
-})
+draggables.forEach( element => {
+    element.addEventListener('dragend', function(e) {
+        listParent.removeChild(element);
+        console.log('it worked!!')
+    }
+})    
