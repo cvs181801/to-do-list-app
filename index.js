@@ -4,11 +4,10 @@ const inputTodo = document.querySelector(".todo__input");
 const addBtn = document.querySelector(".add__button");
 const listParent = document.querySelector(".list__container");
 let draggables = [...document.querySelectorAll(".draggable")];
-const deleteBtn = document.querySelector(".delete__button");
-const deleteContainer = document.querySelector(".delete__btn__contain");
+const deleteContainer = document.querySelector(".delete__contain");
 
 //test area 
-console.log(deleteBtn);
+console.log(deleteContainer);
 
 //make the 'add' button work
 
@@ -30,7 +29,13 @@ addBtn.addEventListener('click', function(e) {
         })
         element.addEventListener('dragend', function(e) {
             element.classList.remove("dragging");
-        })
+        }) 
+
+        // deleteContainer.addEventListener('dragend', function(e) {
+        //     e.preventDefault();
+        //     //listParent.removeChild(element);
+        //     console.log('delete e listener worked!!')
+        // }) 
         
         listParent.addEventListener('dragover', function(e) {
             e.preventDefault();
@@ -43,6 +48,7 @@ addBtn.addEventListener('click', function(e) {
             }  
         })
     })
+   
 })
 
 //make each list item drag - and - droppable even if user does not add new items
@@ -54,6 +60,12 @@ draggables.forEach( element => {
     element.addEventListener('dragend', function(e) {
         element.classList.remove("dragging");
     })
+
+    // deleteContainer.addEventListener('dragend', function(e) {
+    //     e.preventDefault();
+    //     //listParent.removeChild(element);
+    //     console.log('delete e listener worked!!')
+    // }) 
     
     listParent.addEventListener('dragover', function(e) {
         e.preventDefault();
@@ -82,10 +94,10 @@ function getDragAfterElement(listParent, y) {
     }, {offset: Number.NEGATIVE_INFINITY}).element //positive infinity is here so that every number possible in the sortable list will be smaller than it.
 }
 
-
 draggables.forEach( element => {
-    element.addEventListener('dragend', function(e) {
-        listParent.removeChild(element);
+    deleteContainer.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        //listParent.removeChild(element);
         console.log('it worked!!')
-    })
+    }) 
 })    
