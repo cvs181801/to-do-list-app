@@ -87,5 +87,5 @@ draggables.forEach( element => {
     element.addEventListener('dragend', function(e) {
         listParent.removeChild(element);
         console.log('it worked!!')
-    }
+    })
 })    
