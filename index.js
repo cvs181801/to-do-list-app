@@ -22,7 +22,7 @@ addBtn.addEventListener('click', function(e) {
     draggables.push(newItem);
 
 
-//make each item draggable if user adds new items
+//make each item drag and droppable if user adds new items
     draggables.forEach( element => {
         element.addEventListener('dragstart', function(e) {
             element.classList.add("dragging");
@@ -47,6 +47,8 @@ addBtn.addEventListener('click', function(e) {
                 listParent.insertBefore(draggable, afterElement);
             }  
         })
+
+    
     })
    
 })
@@ -70,7 +72,7 @@ draggables.forEach( element => {
     listParent.addEventListener('dragover', function(e) {
         e.preventDefault();
         const afterElement = getDragAfterElement(listParent, e.clientY);
-        const draggable = document.querySelector(".dragging");
+        let draggable = document.querySelector(".dragging");
         if(afterElement === null) {
             listParent.appendChild(draggable)
         } else {
@@ -94,10 +96,24 @@ function getDragAfterElement(listParent, y) {
     }, {offset: Number.NEGATIVE_INFINITY}).element //positive infinity is here so that every number possible in the sortable list will be smaller than it.
 }
 
-draggables.forEach( element => {
+function findTheIndex() {
+    return draggables.findIndex(element => element.classList.contains("dragging"));
+    //console.log(findDraggable);
+   
+}
+
+
     deleteContainer.addEventListener('dragover', function(e) {
         e.preventDefault();
-        //listParent.removeChild(element);
         console.log('it worked!!')
-    }) 
+        //let draggable = document.querySelector(".dragging"); 
+        
+        findTheIndex() 
+        //draggables.splice(0, 1)
+        // console.log('draggable:', draggable);
+        // console.log('draggables:', draggables);
+        // console.log(e);
+        
+    //}) 
 })    
+
