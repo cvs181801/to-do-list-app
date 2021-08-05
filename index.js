@@ -7,14 +7,12 @@ let children = document.querySelectorAll(".draggable");
 let draggables = [...children];
 const deleteContainer = document.querySelector(".delete__contain");
 
-//test area 
-console.log(deleteContainer);
-
 //make the 'add' button work
 
 addBtn.addEventListener('click', function(e) {
     const newItem = document.createElement('p');
     newItem.textContent = inputTodo.value;
+    inputTodo.value = "";
     newItem.className = "draggable";
     const attribute = document.createAttribute('draggable');
     attribute.value = "true";
@@ -31,12 +29,6 @@ addBtn.addEventListener('click', function(e) {
         element.addEventListener('dragend', function(e) {
             element.classList.remove("dragging");
         }) 
-
-        // deleteContainer.addEventListener('dragend', function(e) {
-        //     e.preventDefault();
-        //     //listParent.removeChild(element);
-        //     console.log('delete e listener worked!!')
-        // }) 
         
         listParent.addEventListener('dragover', function(e) {
             e.preventDefault();
@@ -63,12 +55,6 @@ draggables.forEach( element => {
     element.addEventListener('dragend', function(e) {
         element.classList.remove("dragging");
     })
-
-    // deleteContainer.addEventListener('dragend', function(e) {
-    //     e.preventDefault();
-    //     //listParent.removeChild(element);
-    //     console.log('delete e listener worked!!')
-    // }) 
     
     listParent.addEventListener('dragover', function(e) {
         e.preventDefault();
@@ -97,12 +83,14 @@ function getDragAfterElement(listParent, y) {
     }, {offset: Number.NEGATIVE_INFINITY}).element //positive infinity is here so that every number possible in the sortable list will be smaller than it.
 }
 
+
+//tried with a function, didn't work
 // function findTheIndex() {
 //     const findDraggable = draggables.findIndex((element) => element.classList.contains("dragging"));
 //     draggables.splice(findDraggable, 1);
 // }
 
-//try with a for loop
+//tried with a for loop, didnt work
 // function removeByClass(array, cls) {
 //     for(let i=0; i<array.length; i++) {
 //         if (array[i].class == cls ) {
@@ -111,24 +99,9 @@ function getDragAfterElement(listParent, y) {
 //     }
 // }
 
-
     deleteContainer.addEventListener('dragover', function(e) {
         e.preventDefault();
-        console.log('it worked!')
-        //console.log(draggables);
-        //return removeByClass(draggables, "dragging");
         let draggable = document.querySelector(".dragging"); 
         listParent.removeChild(draggable);
-        
-        //findTheIndex();
-        
-        
-        //console.log(findTheIndex());
-        
-        // console.log('draggable:', draggable);
-        // console.log('draggables:', draggables);
-        // console.log(e);
-        
-    //}) 
 })    
 
