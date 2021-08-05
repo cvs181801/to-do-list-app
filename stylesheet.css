@@ -18,23 +18,26 @@
 body {
     background-color: var(--medGrey);
     font-family: var(--ff-main);
-    margin: 5em 30em 1.5em 30em;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.title__container {
+    margin: 3.5em 40em 1.5em 40em;
     text-align: center;
 }
 
-/*.container__div {
-    display: flex;
-}*/
-
 .list__container {
-    display: grid;
-    grid-gap: auto;
-    grid-template-columns: .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr;
-    grid-template-rows: 5em;
-    /*max-width: 120em;
-    text-align: left;*/
-    margin-top: 2em;
-    margin-bottom: 2em;
+    max-width: 30em;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+    
+}
+
+.list__container > * {
+   padding: .2em;
+
 }
 
 .add__button {
@@ -50,10 +53,11 @@ body {
     border-radius: 7px;
     padding: .2em;
     font-size: 1rem;
-    max-width: 6em;
+    max-width: 10em;
     text-align: center;
     justify-content: center;
-    margin: 0 auto;
+    margin: 3.5em 40em 1.5em 40em;
+    letter-spacing: .2rem;
 }
 
 .todo__input {
