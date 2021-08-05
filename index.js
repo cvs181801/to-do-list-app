@@ -3,7 +3,8 @@
 const inputTodo = document.querySelector(".todo__input");
 const addBtn = document.querySelector(".add__button");
 const listParent = document.querySelector(".list__container");
-let draggables = [...document.querySelectorAll(".draggable")];
+let children = document.querySelectorAll(".draggable");
+let draggables = [...children];
 const deleteContainer = document.querySelector(".delete__contain");
 
 //test area 
@@ -101,26 +102,26 @@ function getDragAfterElement(listParent, y) {
 //     draggables.splice(findDraggable, 1);
 // }
 
-function removeByClass(array, cls) {
-    for(let i=0; i<array.length; i++) {
-        if (array[i].class == cls ) {
-            array.splice(i, 1)
-        }
-    }
-}
-
-
+//try with a for loop
+// function removeByClass(array, cls) {
+//     for(let i=0; i<array.length; i++) {
+//         if (array[i].class == cls ) {
+//             array.splice(i, 1)
+//         }
+//     }
+// }
 
 
     deleteContainer.addEventListener('dragover', function(e) {
         e.preventDefault();
         console.log('it worked!')
-        console.log(draggables);
-        return removeByClass(draggables, "dragging");
-        
+        //console.log(draggables);
+        //return removeByClass(draggables, "dragging");
+        let draggable = document.querySelector(".dragging"); 
+        listParent.removeChild(draggable);
         
         //findTheIndex();
-        //let draggable = document.querySelector(".dragging"); 
+        
         
         //console.log(findTheIndex());
         
